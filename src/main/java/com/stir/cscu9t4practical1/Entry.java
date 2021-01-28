@@ -45,8 +45,8 @@ public class Entry {
   } //getSec
 
   public float getDistance () {
-    return distance;
-  } //getYear
+      return distance;
+  } //getDistance
 
   public String getEntry () {
    String result = getName()+" ran " + getDistance() + " km in "
@@ -54,5 +54,24 @@ public class Entry {
              +getDay()+"/"+getMonth()+"/"+getYear()+"\n";
    return result;
   } //getEntry
-   
+
+  public String getTerrain() {
+    return null;
+  }
+
+  public String getTempo() {
+    return null;
+  }
+
+  public int getRepetitions(){
+    return 0;
+  }
+
+  public int getRecovery(){
+    return 0;
+  }
+
+  public String getWhere(){
+    return null;
+  }
 } // Entry
