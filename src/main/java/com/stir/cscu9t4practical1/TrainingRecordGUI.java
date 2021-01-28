@@ -6,6 +6,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 import java.lang.Number;
+import java.util.regex.Pattern;
 
 public class TrainingRecordGUI extends JFrame implements ActionListener {
 
@@ -27,6 +28,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JLabel labdist = new JLabel(" Distance (km):");
     private JButton addR = new JButton("Add");
     private JButton lookUpByDate = new JButton("Look Up");
+    private JButton FindAllByDate = new JButton("Find All By Date");
 
     private TrainingRecord myAthletes = new TrainingRecord();
 
@@ -68,6 +70,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         addR.addActionListener(this);
         add(lookUpByDate);
         lookUpByDate.addActionListener(this);
+        add(FindAllByDate);
+        FindAllByDate.addActionListener(this);
         add(outputArea);
         outputArea.setEditable(false);
         setSize(720, 200);
@@ -87,6 +91,9 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         }
         if (event.getSource() == lookUpByDate) {
             message = lookupEntry();
+        }
+        if (event.getSource() == FindAllByDate){
+            message = lookupAllByDate();
         }
         outputArea.setText(message);
         blankDisplay();
@@ -114,6 +121,15 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         int y = Integer.parseInt(year.getText());
         outputArea.setText("looking up record ...");
         String message = myAthletes.lookupEntry(d, m, y);
+        return message;
+    }
+
+    public String lookupAllByDate(){
+        int m2 = Integer.parseInt(month.getText());
+        int d2 = Integer.parseInt(day.getText());
+        int y2 = Integer.parseInt(year.getText());
+        outputArea.setText("looking up record ...");
+        String message = myAthletes.lookupByDate(d2, m2, y2);
         return message;
     }
 

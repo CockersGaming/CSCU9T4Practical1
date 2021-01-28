@@ -25,12 +25,27 @@ public class TrainingRecord {
        String result = "No entries found";
        while (iter.hasNext()) {
           Entry current = iter.next();
-          if (current.getDay()==d && current.getMonth()==m && current.getYear()==y) 
+          if (current.getDay()==d && current.getMonth()==m && current.getYear()==y)
              result = current.getEntry();
             }
        return result;
    } // lookupEntry
-   
+
+    public String lookupByDate (int d, int m, int y){
+        ListIterator<Entry> iter = tr.listIterator();
+        StringBuilder result=new StringBuilder(""); //1
+        while (iter.hasNext()) {
+            Entry current = iter.next();
+            if (current.getDay() == d && current.getMonth() == m && current.getYear() == y)
+                result.append(current.getEntry()+" ");
+        }
+        //2
+        if(result.equals("")){
+            result.append("No entires found");
+        }
+        return result.toString();
+    }
+
    // Count the number of entries
    public int getNumberOfEntries(){
        return tr.size();
