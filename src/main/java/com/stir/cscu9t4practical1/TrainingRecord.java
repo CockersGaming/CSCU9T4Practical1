@@ -31,7 +31,7 @@ public class TrainingRecord {
        return result;
    } // lookupEntry
 
-    public String lookupByDate (int d, int m, int y){
+    public String lookupAllEntries (int d, int m, int y){
         ListIterator<Entry> iter = tr.listIterator();
         StringBuilder result=new StringBuilder(""); //1
         while (iter.hasNext()) {

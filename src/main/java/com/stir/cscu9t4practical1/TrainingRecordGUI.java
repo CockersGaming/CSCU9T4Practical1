@@ -86,10 +86,10 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     // listen for and respond to GUI events 
     public void actionPerformed(ActionEvent event) {
         String message = "";
-        if (event.getSource() == addR) {
+        if (event.getSource() == addR){
             message = addEntry("generic");
         }
-        if (event.getSource() == lookUpByDate) {
+        if (event.getSource() == lookUpByDate){
             message = lookupEntry();
         }
         if (event.getSource() == FindAllByDate){
@@ -100,37 +100,55 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     } // actionPerformed
 
     public String addEntry(String what) {
-        String message = "Record added\n";
-        System.out.println("Adding "+what+" entry to the records");
-        String n = name.getText();
-        int m = Integer.parseInt(month.getText());
-        int d = Integer.parseInt(day.getText());
-        int y = Integer.parseInt(year.getText());
-        float km = java.lang.Float.parseFloat(dist.getText());
-        int h = Integer.parseInt(hours.getText());
-        int mm = Integer.parseInt(mins.getText());
-        int s = Integer.parseInt(secs.getText());
-        Entry e = new Entry(n, d, m, y, h, mm, s, km);
-        myAthletes.addEntry(e);
-        return message;
+        try{
+            String message = "Record added\n";
+            System.out.println("Adding "+what+" entry to the records");
+            String n = name.getText();
+            int m = Integer.parseInt(month.getText());
+            int d = Integer.parseInt(day.getText());
+            int y = Integer.parseInt(year.getText());
+            float km = java.lang.Float.parseFloat(dist.getText());
+            int h = Integer.parseInt(hours.getText());
+            int mm = Integer.parseInt(mins.getText());
+            int s = Integer.parseInt(secs.getText());
+            Entry e = new Entry(n, d, m, y, h, mm, s, km);
+            myAthletes.addEntry(e);
+            return message;
+        } catch (Exception ex){
+            System.out.println(ex);
+            String message = "You haven't entered the date or duration correctly.\nEnsure that you only use Integers i.e. 1, 2, 3, 4, etc...";
+            return message;
+        }
     }
-    
+
     public String lookupEntry() {
-        int m = Integer.parseInt(month.getText());
-        int d = Integer.parseInt(day.getText());
-        int y = Integer.parseInt(year.getText());
-        outputArea.setText("looking up record ...");
-        String message = myAthletes.lookupEntry(d, m, y);
-        return message;
+        try {
+            int m = Integer.parseInt(month.getText());
+            int d = Integer.parseInt(day.getText());
+            int y = Integer.parseInt(year.getText());
+            outputArea.setText("looking up record ...");
+            String message = myAthletes.lookupEntry(d, m, y);
+            return message;
+        } catch (Exception ex){
+            System.out.println(ex);
+            String message = "You haven't entered the date correctly.\nEnsure that you only use Integers i.e. 1, 2, 3, 4, etc...";
+            return message;
+        }
     }
 
     public String lookupAllByDate(){
-        int m2 = Integer.parseInt(month.getText());
-        int d2 = Integer.parseInt(day.getText());
-        int y2 = Integer.parseInt(year.getText());
-        outputArea.setText("looking up record ...");
-        String message = myAthletes.lookupByDate(d2, m2, y2);
-        return message;
+        try {
+            int m2 = Integer.parseInt(month.getText());
+            int d2 = Integer.parseInt(day.getText());
+            int y2 = Integer.parseInt(year.getText());
+            outputArea.setText("looking up record ...");
+            String message = myAthletes.lookupAllEntries(d2, m2, y2);
+            return message;
+        } catch (Exception ex){
+            System.out.println(ex);
+            String message = "You haven't entered a valid name or date correctly.\nEnsure that you only use Integers i.e. 1, 2, 3, 4, etc...";
+            return message;
+        }
     }
 
     public void blankDisplay() {
