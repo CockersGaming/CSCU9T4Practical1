@@ -4,8 +4,8 @@ public class SwimEntry extends Entry{
 
     protected String where = "";
 
-    public SwimEntry(String n, int d, int m, int y, int h, int min, int s, float dist, String where){
-        super(n,d,m,y,h,min,s,dist);
+    public SwimEntry(String n, String a, int d, int m, int y, int h, int min, int s, float dist, String where){
+        super(n,a,d,m,y,h,min,s,dist);
         this.where = where;
     }
 

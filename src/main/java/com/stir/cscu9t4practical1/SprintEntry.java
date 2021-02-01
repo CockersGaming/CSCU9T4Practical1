@@ -4,8 +4,8 @@ public class SprintEntry extends Entry {
 
     protected int rep, res = 0;
 
-    public SprintEntry(String n, int d, int m, int y, int h, int min, int s, float dist, int rep, int res){
-        super(n,d,m,y,h,min,s,dist);
+    public SprintEntry(String n, String a, int d, int m, int y, int h, int min, int s, float dist, int rep, int res){
+        super(n,a,d,m,y,h,min,s,dist);
         this.rep = rep;
         this.res = res;
     }
