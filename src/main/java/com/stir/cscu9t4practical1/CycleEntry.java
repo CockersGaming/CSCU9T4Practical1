@@ -2,11 +2,11 @@ package com.stir.cscu9t4practical1;
 
 public class CycleEntry extends Entry {
 
-    protected String t, tempo = "";
+    private String ter = "", tempo = "", activity;
 
-    public CycleEntry(String n, String a, int d, int m, int y, int h, int min, int s, float dist, String t, String tempo) {
-        super(n,a,d,m,y,h,min,s,dist);
-        this.t = t;
+    public CycleEntry(String n, int d, int m, int y, int h, int min, int s, float dist, String ter, String tempo) {
+        super(n,d,m,y,h,min,s,dist);
+        this.ter = ter;
         this.tempo = tempo;
     }
 
@@ -18,7 +18,7 @@ public class CycleEntry extends Entry {
     } //getEntry
 
     public String getTerrain(){
-        return t;
+        return ter;
     }
 
     public String getTempo(){

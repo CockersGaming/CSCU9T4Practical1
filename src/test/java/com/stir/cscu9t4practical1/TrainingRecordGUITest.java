@@ -88,7 +88,7 @@ public class TrainingRecordGUITest {
     public void testAddEntry(){
         System.out.println("addEntry");
         TrainingRecordGUI instance = new TrainingRecordGUI();
-        Entry entry = new Entry("Alice", "run",1, 2, 2003, 0, 16, 7, 3);
+        Entry entry = new Entry("Alice",1, 2, 2003, 0, 16, 7, 3);
         instance.fillDisplay(entry);
         String message = instance.addEntry("generic");
         System.out.println(message);

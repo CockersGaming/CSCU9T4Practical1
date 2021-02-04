@@ -1,11 +1,7 @@
 // An implementation of a Training Record as an ArrayList
 package com.stir.cscu9t4practical1;
 
-
-
-
 import java.util.*;
-
 
 public class TrainingRecord {
     private List<Entry> tr;
@@ -22,33 +18,18 @@ public class TrainingRecord {
    // look up the entry of a given day and month
    public String lookupEntry (int d, int m, int y) {
        ListIterator<Entry> iter = tr.listIterator();
-       String result = "No entries found";
-       while (iter.hasNext()) {
-          Entry current = iter.next();
-          if (current.getDay()==d && current.getMonth()==m && current.getYear()==y)
-             result = current.getEntry();
-            }
-       return result;
-   } // lookupEntry
-
-    public String lookupAllEntries (int d, int m, int y){
-        ListIterator<Entry> iter = tr.listIterator();
-        StringBuilder result=new StringBuilder(""); //1
+       StringBuilder result=new StringBuilder(""); //1
         while (iter.hasNext()) {
             Entry current = iter.next();
-            if (current.getDay() == d && current.getMonth() == m && current.getYear() == y)
-                result.append(current.getEntry()+" ");
-        }
-        //2
-        if(result.equals("")){
-            result.append("No entires found");
+            if (current.getDay()==d && current.getMonth()==m && current.getYear()==y)
+                result.append(current.getEntry() + " ");
         }
         return result.toString();
-    }
+   } // lookupEntry
 
-    public String lookupByActivity (String a, int d, int m, int y){
+    public String lookupAllByDate (int d, int m, int y) {
         ListIterator<Entry> iter = tr.listIterator();
-        StringBuilder result=new StringBuilder(""); //1
+        StringBuilder result=new StringBuilder(""); //create a StringBuilder to concatenate a string with entries on that date
         while (iter.hasNext()) {
             Entry current = iter.next();
             if (current.getDay() == d && current.getMonth() == m && current.getYear() == y)

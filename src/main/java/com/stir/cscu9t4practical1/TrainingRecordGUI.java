@@ -34,8 +34,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JLabel laba = new JLabel(" Activity:");
 
     //cycle area
-    private JLabel labter = new JLabel(" Terrain:");
-    private JLabel labtem = new JLabel(" Tempo:");
+    private JLabel labter = new JLabel(" Terrain: ");
+    private JLabel labtem = new JLabel(" Tempo: ");
 
     String[] tempoArray = { "slow", "moderate", "fast"};
     private JComboBox tempo = new JComboBox(tempoArray);
@@ -44,8 +44,16 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JComboBox terrain = new JComboBox(terrainArray);
 
     //sprint area
+    private JLabel labRep = new JLabel("Repetitions: ");
+    private JLabel labRes = new JLabel("Recovery: ");
 
+    private JTextField rep = new JTextField(2);
+    private JTextField res = new JTextField(5);
 
+    //swim area
+    private JLabel labWhere = new JLabel("Location: ");
+
+    private JTextField where = new JTextField(30);
 
     private TrainingRecord myAthletes = new TrainingRecord();
 
@@ -86,6 +94,21 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         add(labdist);
         add(dist);
         dist.setEditable(true);
+        add(labter);
+        add(terrain);
+        terrain.setEditable(false);
+        add(labtem);
+        add(tempo);
+        tempo.setEditable(false);
+        add(labRep);
+        add(rep);
+        rep.setEditable(true);
+        add(labRes);
+        add(res);
+        res.setEditable(true);
+        add(labWhere);
+        add(where);
+        where.setEditable(true);
         add(addR);
         addR.addActionListener(this);
         add(lookUpByDate);
@@ -115,19 +138,17 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         if (event.getSource() == FindAllByDate){
             message = lookupAllByDate();
         }
-        if (event.getSource() == activity){
-            message = lookupByActivity();
-        }
         outputArea.setText(message);
         blankDisplay();
     } // actionPerformed
 
     public String addEntry(String what) {
-        try{
-            String message = "Record added\n";
+        String message = "";
+        try {
+            message = "Record added\n";
             System.out.println("Adding "+what+" entry to the records");
             String n = name.getText();
-            String a = (String)activity.getSelectedItem();
+            String a = String.valueOf(activity.getSelectedItem());
             int m = Integer.parseInt(month.getText());
             int d = Integer.parseInt(day.getText());
             int y = Integer.parseInt(year.getText());
@@ -135,20 +156,45 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             int h = Integer.parseInt(hours.getText());
             int mm = Integer.parseInt(mins.getText());
             int s = Integer.parseInt(secs.getText());
-            Entry e = null;
-            switch (a){
-                default: e = new Entry(n, a, d, m, y, h, mm, s, km); break;
-                case "cycle": e = new CycleEntry(n, a, d, m, y, h, mm, s, km); break;
-                case "sprint": e = new SprintEntry(n, a, d, m, y, h, mm, s, km); break;
-                case "swim": e = new SwimEntry(n, a, d, m, y, h, mm, s, km); break;
+
+            System.out.println(a + "\n" + n + "\n" + m + "\n" + d + "\n" + y + "\n" + km + "\n" + h + "\n" + mm + "\n" + s);
+
+            switch (a) {
+                case "run": addRunEntry(n,d,m,y,h,mm,s,km); break;
+                case "cycle": addCycleEntry(n,d,m,y,h,mm,s,km,String.valueOf(terrain.getSelectedItem()),String.valueOf(tempo.getSelectedItem())); break;
+                case "sprint": addSprintEntry(n,d,m,y,h,mm,s,km,Integer.parseInt(rep.getText()),Integer.parseInt(res.getText())); break;
+                case "swim": addSwimEntry(n,d,m,y,h,mm,s,km,where.getText()); break;
             }
-            myAthletes.addEntry(e);
             return message;
         } catch (Exception ex){
             System.out.println(ex);
-            String message = "You haven't entered the date or duration correctly.\nEnsure that you only use Integers i.e. 1, 2, 3, 4, etc...";
+            message = "You haven't entered the date or duration correctly.\nEnsure that you only use Integers i.e. 1, 2, 3, 4, etc...";
             return message;
         }
+    }
+
+    private void addRunEntry(String n, int d, int m, int y, int h, int mm, int s, float km){
+        //add entry
+        Entry e = new Entry(n,d,m,y,h,mm,s,km);
+        myAthletes.addEntry(e);
+    }
+
+    private void addCycleEntry(String n, int d, int m, int y, int h, int mm, int s, float km, String terr, String tempo){
+        //add entry
+        Entry e = new CycleEntry(n,d,m,y,h,mm,s,km,terr,tempo);
+        myAthletes.addEntry(e);
+    }
+
+    private void addSprintEntry(String n, int d, int m, int y, int h, int mm, int s, float km, int rep, int res){
+        //add entry
+        Entry e = new SprintEntry(n,d,m,y,h,mm,s,km,rep,res);
+        myAthletes.addEntry(e);
+    }
+
+    private void addSwimEntry(String n, int d, int m, int y, int h, int mm, int s, float km, String w){
+        //add entry
+        Entry e = new SwimEntry(n,d,m,y,h,mm,s,km,w);
+        myAthletes.addEntry(e);
     }
 
     public String lookupEntry() {
@@ -172,23 +218,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             int d2 = Integer.parseInt(day.getText());
             int y2 = Integer.parseInt(year.getText());
             outputArea.setText("looking up record ...");
-            String message = myAthletes.lookupAllEntries(d2, m2, y2);
-            return message;
-        } catch (Exception ex){
-            System.out.println(ex);
-            String message = "You haven't entered a valid name or date correctly.\nEnsure that you only use Integers i.e. 1, 2, 3, 4, etc...";
-            return message;
-        }
-    }
-
-    public String lookupByActivity(){
-        try {
-            String a = (String) activity.getSelectedItem();
-            int m2 = Integer.parseInt(month.getText());
-            int d2 = Integer.parseInt(day.getText());
-            int y2 = Integer.parseInt(year.getText());
-            outputArea.setText("looking up record ...");
-            String message = myAthletes.lookupByActivity(a, d2, m2, y2);
+            String message = myAthletes.lookupAllByDate(d2, m2, y2);
             return message;
         } catch (Exception ex){
             System.out.println(ex);
@@ -199,6 +229,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
     public void blankDisplay() {
         name.setText("");
+        activity.setSelectedItem(0);
         day.setText("");
         month.setText("");
         year.setText("");
@@ -206,6 +237,11 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         mins.setText("");
         secs.setText("");
         dist.setText("");
+        terrain.setSelectedItem(0);
+        tempo.setSelectedItem(0);
+        rep.setText("");
+        res.setText("");
+        where.setText("");
 
     }// blankDisplay
     // Fills the input fields on the display for testing purposes only
