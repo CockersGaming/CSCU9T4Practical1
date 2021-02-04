@@ -29,6 +29,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JButton addR = new JButton("Add");
     private JButton lookUpByDate = new JButton("Look Up");
     private JButton FindAllByDate = new JButton("Find All By Date");
+    private JButton FindAllByName = new JButton("Find All By Name");
     String[] activityArray = { "run", "cycle", "sprint", "swim"};
     private JComboBox activity = new JComboBox(activityArray);
     private JLabel laba = new JLabel(" Activity:");
@@ -115,6 +116,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         lookUpByDate.addActionListener(this);
         add(FindAllByDate);
         FindAllByDate.addActionListener(this);
+        add(FindAllByName);
+        FindAllByName.addActionListener(this);
         add(outputArea);
         outputArea.setEditable(false);
         setSize(720, 200);
@@ -137,6 +140,9 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         }
         if (event.getSource() == FindAllByDate){
             message = lookupAllByDate();
+        }
+        if (event.getSource() == FindAllByName){
+            message = lookupAllByName();
         }
         outputArea.setText(message);
         blankDisplay();
@@ -219,6 +225,19 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             int y2 = Integer.parseInt(year.getText());
             outputArea.setText("looking up record ...");
             String message = myAthletes.lookupAllByDate(d2, m2, y2);
+            return message;
+        } catch (Exception ex){
+            System.out.println(ex);
+            String message = "You haven't entered a valid name or date correctly.\nEnsure that you only use Integers i.e. 1, 2, 3, 4, etc...";
+            return message;
+        }
+    }
+
+    public String lookupAllByName(){
+        try {
+            String n = name.getText();
+            outputArea.setText("looking up record ...");
+            String message = myAthletes.lookupAllByName(n);
             return message;
         } catch (Exception ex){
             System.out.println(ex);

@@ -42,6 +42,21 @@ public class TrainingRecord {
         return result.toString();
     }
 
+    public String lookupAllByName (String n) {
+        ListIterator<Entry> iter = tr.listIterator();
+        StringBuilder result=new StringBuilder(""); //create a StringBuilder to concatenate a string with entries on that date
+        while (iter.hasNext()) {
+            Entry current = iter.next();
+            if (current.getName().equals(n))
+                result.append(current.getEntry()+" ");
+        }
+        //2
+        if(result.equals("")){
+            result.append("No entires found");
+        }
+        return result.toString();
+    }
+
    // Count the number of entries
    public int getNumberOfEntries(){
        return tr.size();
