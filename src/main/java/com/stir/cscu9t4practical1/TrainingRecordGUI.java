@@ -30,6 +30,7 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
     private JButton lookUpByDate = new JButton("Look Up");
     private JButton FindAllByDate = new JButton("Find All By Date");
     private JButton FindAllByName = new JButton("Find All By Name");
+    private JButton remove = new JButton("Remove");
     String[] activityArray = { "run", "cycle", "sprint", "swim"};
     private JComboBox activity = new JComboBox(activityArray);
     private JLabel laba = new JLabel(" Activity:");
@@ -112,6 +113,8 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         where.setEditable(true);
         add(addR);
         addR.addActionListener(this);
+        add(remove);
+        remove.addActionListener(this);
         add(lookUpByDate);
         lookUpByDate.addActionListener(this);
         add(FindAllByDate);
@@ -143,6 +146,9 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
         }
         if (event.getSource() == FindAllByName){
             message = lookupAllByName();
+        }
+        if (event.getSource() == remove){
+            message = removeEntry();
         }
         outputArea.setText(message);
         blankDisplay();
@@ -238,6 +244,22 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
             String n = name.getText();
             outputArea.setText("looking up record ...");
             String message = myAthletes.lookupAllByName(n);
+            return message;
+        } catch (Exception ex){
+            System.out.println(ex);
+            String message = "You haven't entered a valid name or date correctly.\nEnsure that you only use Integers i.e. 1, 2, 3, 4, etc...";
+            return message;
+        }
+    }
+
+    public String removeEntry(){
+        try {
+            String n = name.getText();
+            int m = Integer.parseInt(month.getText());
+            int d = Integer.parseInt(day.getText());
+            int y = Integer.parseInt(year.getText());
+            outputArea.setText("removing record ...");
+            String message = myAthletes.removeEntry(n, m, d, y);
             return message;
         } catch (Exception ex){
             System.out.println(ex);
