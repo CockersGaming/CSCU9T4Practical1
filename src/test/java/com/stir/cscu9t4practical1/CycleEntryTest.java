@@ -47,6 +47,11 @@ public class CycleEntryTest {
         String expResult = "Alice";
         String result = instance.getName();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Matt",1, 2, 2003, 0, 16, 7, 3F, "asphalt", "moderate");
+        String expResult2 = "Matt";
+        String result2 = instance2.getName();
+        assertEquals(expResult2, result2);
     }
 
     /**
@@ -57,8 +62,13 @@ public class CycleEntryTest {
         System.out.println("getDay");
         Entry instance = new CycleEntry("Alice",1, 2, 2003, 0, 16, 7, 3F, "gravel", "moderate");
         int expResult = 1;
-        int result = instance.getDay();
-        assertEquals(expResult, result);
+        int result1 = instance.getDay();
+        assertEquals(expResult, result1);
+
+        Entry instance2 = new CycleEntry("Alice",29, 2, 2003, 0, 16, 7, 3F, "gravel", "moderate");
+        int expResult2 = 29;
+        int result2 = instance2.getDay();
+        assertEquals(expResult2, result2);
     }
 
     /**
@@ -71,6 +81,11 @@ public class CycleEntryTest {
         int expResult = 2;
         int result = instance.getMonth();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Alice",1, 12, 2003, 0, 16, 7, 3F, "mountain", "fast");
+        int expResult2 = 12;
+        int result2 = instance2.getMonth();
+        assertEquals(expResult2, result2);
     }
 
     /**
@@ -83,6 +98,11 @@ public class CycleEntryTest {
         int expResult = 2003;
         int result = instance.getYear();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Alice",1, 2, 1987, 0, 16, 7, 3F, "gravel", "slow");
+        int expResult2 = 1987;
+        int result2 = instance2.getYear();
+        assertEquals(expResult2, result2);
     }
 
     /**
@@ -95,6 +115,11 @@ public class CycleEntryTest {
         int expResult = 0;
         int result = instance.getHour();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Alice",1, 2, 2003, 5, 16, 7, 3F, "asphalt", "fast");
+        int expResult2 = 5;
+        int result2 = instance2.getHour();
+        assertEquals(expResult2, result2);
     }
 
     /**
@@ -107,6 +132,11 @@ public class CycleEntryTest {
         int expResult = 16;
         int result = instance.getMin();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Alice",1, 2, 2003, 0, 51, 7, 3F, "asphalt", "moderate");
+        int expResult2 = 51;
+        int result2 = instance2.getMin();
+        assertEquals(expResult2, result2);
     }
 
     /**
@@ -119,6 +149,11 @@ public class CycleEntryTest {
         int expResult = 7;
         int result = instance.getSec();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Alice",1, 2, 2003, 0, 16, 18, 3F, "asphalt", "moderate");
+        int expResult2 = 18;
+        int result2 = instance2.getSec();
+        assertEquals(expResult2, result2);
     }
 
     /**
@@ -131,6 +166,11 @@ public class CycleEntryTest {
         float expResult = 3.0F;
         float result = instance.getDistance();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Alice",1, 2, 2003, 0, 16, 7, 5.56F, "asphalt", "moderate");
+        float expResult2 = 5.56F;
+        float result2 = instance2.getDistance();
+        assertEquals(expResult2, result2);
     }
     
     /**
@@ -141,6 +181,25 @@ public class CycleEntryTest {
         System.out.println("getTerrain");
         Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3F, "asphalt", "moderate");
         String expResult = "asphalt";
+        String result = instance.getTerrain();
+        assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3F, "dirt", "moderate");
+        String expResult2 = "dirt";
+        String result2 = instance2.getTerrain();
+
+        assertEquals(expResult2, result2);
+    }
+
+    /**
+     * Test of setTerrain method, of class CycleEntry.
+     */
+    @Test
+    public void testSetTerrain(){
+        System.out.println("setTempo");
+        Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        String expResult = "asphalt";
+        instance.setTerrain("asphalt");
         String result = instance.getTerrain();
         assertEquals(expResult, result);
     }
@@ -155,8 +214,26 @@ public class CycleEntryTest {
         String expResult = "moderate";
         String result = instance.getTempo();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Alice",1, 2, 2003, 0, 16, 7, 3F, "asphalt", "slow");
+        String expResult2 = "slow";
+        String result2 = instance2.getTempo();
+        assertEquals(expResult2, result2);
     }
-    
+
+    /**
+     * Test of setTempo method, of class CycleEntry.
+     */
+    @Test
+    public void testSetTempo(){
+        System.out.println("setTempo");
+        Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
+        String expResult = "moderate";
+        instance.setTerrain("moderate");
+        String result = instance.getTempo();
+        assertEquals(expResult, result);
+    }
+
     /**
      * Test of getEntry method, of class CycleEntry.
      */
@@ -167,6 +244,12 @@ public class CycleEntryTest {
         String expResult = "Alice cycled 3.0 km in 0:16:7 on 1/2/2003 on asphalt at moderate tempo\n";
         String result = instance.getEntry();
         assertEquals(expResult, result);
+
+        Entry instance2 = new CycleEntry("Jack",14, 10, 2019, 0, 1, 26, 0.5F, "gravel", "fast");
+        String expResult2 = "Jack cycled 0.5 km in 0:1:26 on 14/10/2019 on gravel at fast tempo\n";
+        String result2 = instance2.getEntry();
+        assertEquals(expResult2, result2);
+
     }
     
 }
