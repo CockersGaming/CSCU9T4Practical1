@@ -286,15 +286,82 @@ public class TrainingRecordGUI extends JFrame implements ActionListener {
 
     }// blankDisplay
     // Fills the input fields on the display for testing purposes only
-    public void fillDisplay(Entry ent) {
-        name.setText(ent.getName());
-        day.setText(String.valueOf(ent.getDay()));
-        month.setText(String.valueOf(ent.getMonth()));
-        year.setText(String.valueOf(ent.getYear()));
-        hours.setText(String.valueOf(ent.getHour()));
-        mins.setText(String.valueOf(ent.getMin()));
-        secs.setText(String.valueOf(ent.getSec()));
-        dist.setText(String.valueOf(ent.getDistance()));
+    public void fillDisplay(Entry ent, int a) {
+        setDropDownValue(a);
+
+        String ac = String.valueOf(activity.getSelectedItem());
+
+        switch (ac){
+            case "run": fillRunEntry(ent); break;
+            case "cycle": fillCycleEntry(ent); break;
+            case "sprint": fillSprintEntry(ent); break;
+            case "swim": fillSwimEntry(ent); break;
+        }
+    }
+
+    private void fillRunEntry(Entry e){
+        name.setText(e.getName());
+        activity.setSelectedItem(1);
+        day.setText(String.valueOf(e.getDay()));
+        month.setText(String.valueOf(e.getMonth()));
+        year.setText(String.valueOf(e.getYear()));
+        hours.setText(String.valueOf(e.getHour()));
+        mins.setText(String.valueOf(e.getMin()));
+        secs.setText(String.valueOf(e.getSec()));
+        dist.setText(String.valueOf(e.getDistance()));
+    }
+
+    private void fillCycleEntry(Entry e){
+        name.setText(e.getName());
+        activity.setSelectedItem(2);
+        day.setText(String.valueOf(e.getDay()));
+        month.setText(String.valueOf(e.getMonth()));
+        year.setText(String.valueOf(e.getYear()));
+        hours.setText(String.valueOf(e.getHour()));
+        mins.setText(String.valueOf(e.getMin()));
+        secs.setText(String.valueOf(e.getSec()));
+        dist.setText(String.valueOf(e.getDistance()));
+        switch (e.getTerrain()){
+            case "Asphalt": terrain.setSelectedItem(1); break;
+            case "Concrete": terrain.setSelectedItem(2); break;
+            case "Tarmac": terrain.setSelectedItem(3); break;
+            case "Gravel": terrain.setSelectedItem(4); break;
+            case "dirt": terrain.setSelectedItem(5); break;
+            case "cobblestones": terrain.setSelectedItem(6); break;
+        }
+        switch (e.getTempo()){
+            case "slow": tempo.setSelectedItem(1); break;
+            case "moderate": tempo.setSelectedItem(2); break;
+            case "fast": tempo.setSelectedItem(3); break;
+        }
+    }
+
+    private void fillSprintEntry(Entry e){
+        name.setText(e.getName());
+        activity.setSelectedItem(3);
+        day.setText(String.valueOf(e.getDay()));
+        month.setText(String.valueOf(e.getMonth()));
+        year.setText(String.valueOf(e.getYear()));
+        hours.setText(String.valueOf(e.getHour()));
+        mins.setText(String.valueOf(e.getMin()));
+        secs.setText(String.valueOf(e.getSec()));
+        dist.setText(String.valueOf(e.getDistance()));
+    }
+
+    private void fillSwimEntry(Entry e){
+        name.setText(e.getName());
+        activity.setSelectedItem(4);
+        day.setText(String.valueOf(e.getDay()));
+        month.setText(String.valueOf(e.getMonth()));
+        year.setText(String.valueOf(e.getYear()));
+        hours.setText(String.valueOf(e.getHour()));
+        mins.setText(String.valueOf(e.getMin()));
+        secs.setText(String.valueOf(e.getSec()));
+        dist.setText(String.valueOf(e.getDistance()));
+    }
+
+    public void setDropDownValue(int i){
+        activity.setSelectedItem(i);
     }
 
 } // TrainingRecordGUI

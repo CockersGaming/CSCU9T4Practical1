@@ -65,8 +65,8 @@ public class CycleEntryTest {
         int result1 = instance.getDay();
         assertEquals(expResult, result1);
 
-        Entry instance2 = new CycleEntry("Alice",29, 2, 2003, 0, 16, 7, 3F, "gravel", "moderate");
-        int expResult2 = 29;
+        Entry instance2 = new CycleEntry("Alice",19, 2, 2003, 0, 16, 7, 3F, "gravel", "moderate");
+        int expResult2 = 19;
         int result2 = instance2.getDay();
         assertEquals(expResult2, result2);
     }
@@ -196,7 +196,7 @@ public class CycleEntryTest {
      */
     @Test
     public void testSetTerrain(){
-        System.out.println("setTempo");
+        System.out.println("setTerrain");
         Entry instance = new CycleEntry("Alice", 1, 2, 2003, 0, 16, 7, 3, "asphalt", "moderate");
         String expResult = "asphalt";
         instance.setTerrain("asphalt");

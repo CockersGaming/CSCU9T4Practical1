@@ -149,6 +149,24 @@ public class SwimEntryTest {
         assertEquals(expResultB, resultB);
     }
     /**
+     * Test of setWhere method, of class SwimEntry
+     */
+    @Test
+    public void testSetWhere() {
+        System.out.println("setWhere");
+        Entry instanceA = new SwimEntry("Alice",1, 2, 2003, 0, 16, 7, 3F,"pool");
+        String expResultA = "pool";
+        instanceA.setWhere("pool");
+        String resultA = instanceA.getWhere();
+        assertEquals(expResultA, resultA);
+
+        Entry instanceB = new SwimEntry("Alice",1, 2, 2003, 0, 16, 7, 3F,"outdoors");
+        String expResultB = "outdoors";
+        instanceB.setWhere("outdoors");
+        String resultB = instanceB.getWhere();
+        assertEquals(expResultB, resultB);
+    }
+    /**
      * Test of getEntry method, of class SwimEntry.
      */
     @Test

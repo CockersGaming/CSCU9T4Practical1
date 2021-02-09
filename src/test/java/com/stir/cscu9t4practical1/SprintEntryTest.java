@@ -143,15 +143,41 @@ public class SprintEntryTest {
         int result = instance.getRepetitions();
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of setRepetitions method of class SprintEntry
+     */
+    @Test
+    public void testSetRepetitions() {
+        System.out.println("setRepetitions");
+        Entry instance = new SprintEntry("Alice",1, 2, 2003, 0, 16, 7, 300, 10, 2);
+        int expResult = 10;
+        instance.setRepetitions(10);
+        int result = instance.getRepetitions();
+        assertEquals(expResult, result);
+    }
     
     /**
      * Test of getRecovery method of class SprintEntry
      */
     @Test
     public void testGetRecovery() {
-        System.out.println("getRepetitions");
+        System.out.println("getRecovery");
         Entry instance = new SprintEntry("Alice",1, 2, 2003, 0, 16, 7, 300, 4, 2);
         int expResult = 2;
+        int result = instance.getRecovery();
+        assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setRecovery method of class SprintEntry
+     */
+    @Test
+    public void testSetRecovery() {
+        System.out.println("setRecovery");
+        Entry instance = new SprintEntry("Alice",1, 2, 2003, 0, 16, 7, 300, 4, 5);
+        int expResult = 5;
+        instance.setRecovery(5);
         int result = instance.getRecovery();
         assertEquals(expResult, result);
     }
